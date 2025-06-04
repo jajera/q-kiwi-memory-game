@@ -1,0 +1,405 @@
+/* Kiwi Memory Game Styles */
+
+/* CSS Variables for theme colors */
+:root {
+    /* Default theme: Forest Green */
+    --primary-color: #2e8b57;
+    --secondary-color: #4F7942;
+    --accent-color: #8b4513;
+    --background-start: #a8e6cf;
+    --background-end: #4F7942;
+    --card-back: #4F7942;
+    --card-back-pattern: #3a5d32;
+    --text-color: #333;
+    --light-text: #fff;
+    --card-matched: rgba(46, 139, 87, 0.2);
+    --win-heading: #d42e12;
+    
+    /* Font settings */
+    --main-font: 'Poppins', sans-serif;
+    --heading-font: 'Comic Neue', cursive;
+}
+
+/* Tui Blue Theme */
+.theme-tui-blue {
+    --primary-color: #1a75ff;
+    --secondary-color: #0056b3;
+    --accent-color: #003366;
+    --background-start: #cce6ff;
+    --background-end: #1a75ff;
+    --card-back: #0056b3;
+    --card-back-pattern: #003d80;
+    --card-matched: rgba(26, 117, 255, 0.2);
+    --win-heading: #ff6600;
+}
+
+/* Sunset Orange Theme */
+.theme-sunset-orange {
+    --primary-color: #ff6600;
+    --secondary-color: #cc5200;
+    --accent-color: #993d00;
+    --background-start: #ffcc99;
+    --background-end: #ff6600;
+    --card-back: #cc5200;
+    --card-back-pattern: #993d00;
+    --card-matched: rgba(255, 102, 0, 0.2);
+    --win-heading: #2e8b57;
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--main-font);
+    min-height: 100vh;
+    background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23333' fill-opacity='0.2' d='M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,229.3C960,213,1056,171,1152,165.3C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100%;
+    color: var(--text-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    font-family: var(--heading-font);
+    font-weight: 700;
+}
+
+/* Controls section */
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+select, button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    background-color: white;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+select:hover, button:hover {
+    border-color: var(--primary-color);
+}
+
+select:focus, button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0;
+}
+
+/* Game info section */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+}
+
+.stats {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.stats span {
+    margin-right: 15px;
+}
+
+button#restart-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: var(--main-font);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button#restart-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+button#restart-btn:active {
+    transform: translateY(0);
+}
+
+/* Game board */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 12px;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.card {
+    aspect-ratio: 1/1;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-back {
+    background-color: var(--card-back);
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,5 C60,25 75,40 95,50 C75,60 60,75 50,95 C40,75 25,60 5,50 C25,40 40,25 50,5 Z' fill='%233a5d32' fill-opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 50px;
+}
+
+.card-back::after {
+    content: '🧩';
+    font-size: 2rem;
+}
+
+.card-front {
+    background-color: white;
+    transform: rotateY(180deg);
+    font-size: 3rem;
+    color: var(--text-color);
+}
+
+.card.matched .card-front {
+    background-color: var(--card-matched);
+    animation: pulse 1s;
+}
+
+@keyframes pulse {
+    0% { transform: rotateY(180deg) scale(1); }
+    50% { transform: rotateY(180deg) scale(1.1); }
+    100% { transform: rotateY(180deg) scale(1); }
+}
+
+/* Win message */
+#win-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: auto;
+}
+
+.win-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    animation: pop-in 0.5s;
+    position: relative;
+    z-index: 101;
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.win-content h2 {
+    color: var(--win-heading);
+    margin-bottom: 15px;
+    font-family: var(--heading-font);
+    font-size: 2rem;
+}
+
+.win-content p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#play-again-btn {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#play-again-btn:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#play-again-btn:active {
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none !important;
+    pointer-events: none;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: var(--text-color);
+    font-style: italic;
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Confetti animation for win celebration */
+@keyframes confetti-fall {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: var(--win-heading);
+    opacity: 0;
+    z-index: 99;
+    animation: confetti-fall 4s ease-out forwards;
+}
+
+.confetti:nth-child(2n) {
+    background-color: var(--primary-color);
+    animation-delay: 0.2s;
+    animation-duration: 3.5s;
+}
+
+.confetti:nth-child(3n) {
+    background-color: var(--secondary-color);
+    animation-delay: 0.4s;
+    animation-duration: 4.5s;
+}
+
+.confetti:nth-child(4n) {
+    background-color: var(--accent-color);
+    animation-delay: 0.6s;
+    animation-duration: 5s;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .game-board {
+        grid-gap: 8px;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .card-front {
+        font-size: 2rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+}
