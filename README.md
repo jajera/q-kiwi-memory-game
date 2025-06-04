@@ -26,7 +26,7 @@ A fun, browser-based memory matching game themed around New Zealand icons and wi
    ```
 
 2. Open `index.html` in your browser
-3. Play immediately — no server or setup required (<https://jajera.github.io/kiwi-memory-game/>)
+3. Play immediately — no server or setup required (<https://jajera.github.io/q-kiwi-memory-game/>)
 
 ---
 
@@ -37,11 +37,7 @@ This game works perfectly on GitHub Pages:
 1. Push this project to GitHub
 2. Go to **Settings > Pages**
 3. Set the source to `main` branch and root directory `/`
-4. Visit the game at:
-
-   ```plaintext
-   https://jajera.github.io/kiwi-memory-game/
-   ```
+4. Visit the game at <https://jajera.github.io/q-kiwi-memory-game/>
 
 ---
 
